@@ -2,15 +2,18 @@ FROM php:8.3-apache
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Ensure Apache uses only prefork with mod_php.
-RUN a2dismod mpm_event mpm_worker || true \
-    && a2enmod mpm_prefork \
-    && a2enmod rewrite
+# Remove every enabled MPM, then enable only prefork.
+RUN rm -f /etc/apache2/mods-enabled/mpm_event.load \
+          /etc/apache2/mods-enabled/mpm_event.conf \
+          /etc/apache2/mods-enabled/mpm_worker.load \
+          /etc/apache2/mods-enabled/mpm_worker.conf \
+          /etc/apache2/mods-enabled/mpm_prefork.load \
+          /etc/apache2/mods-enabled/mpm_prefork.conf \
+    && a2enmod mpm_prefork rewrite \
+    && apache2ctl -M | grep mpm
 
 COPY . /var/www/html/
 
-RUN chown -R www-data:www-data /var/www/html \
-    && find /var/www/html -type d -exec chmod 755 {} \; \
-    && find /var/www/html -type f -exec chmod 644 {} \;
+RUN chown -R www-data:www-data /var/www/html
 
 EXPOSE 80
