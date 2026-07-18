@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="200" viewBox="0 0 320 200">
+  <rect width="320" height="200" fill="#282828"/>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="#a3a3a3" font-family="system-ui,sans-serif" font-size="14">Project image</text>
+</svg>
