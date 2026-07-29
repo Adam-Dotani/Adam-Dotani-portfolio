@@ -1,5 +1,5 @@
 -- Run this script in MySQL (phpMyAdmin or mysql CLI)
--- Creates database and tables for ECS417U Phase 2
+-- Creates database and tables
 
 CREATE TABLE IF NOT EXISTS users (
     id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
